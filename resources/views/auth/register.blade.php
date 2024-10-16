@@ -63,7 +63,6 @@
                             @enderror
                         </div>
 
-
                         <div class="mb-3">
                             <label for="password" class="form-label">Password </label>
                             <div class="input-group">
