@@ -26,10 +26,11 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nama *</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
-                                placeholder="Masukkan nama Anda">
+                            <label for="fullname" class="form-label">Nama Lengkap</label>
+                            <input id="fullname" type="text"
+                                class="form-control @error('fullname') is-invalid @enderror" name="fullname"
+                                value="{{ old('fullname') }}" required autocomplete="name" autofocus
+                                placeholder="Masukkan nama Lengkap Anda">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -38,7 +39,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email *</label>
+                            <label for="email" class="form-label">Email </label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                 name="email" value="{{ old('email') }}" required autocomplete="email"
                                 placeholder="Masukkan alamat email Anda">
@@ -50,7 +51,21 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password *</label>
+                            <label for="phone_number" class="form-label">Phone Number</label>
+                            <input id="phone_number" type="text" inputmode="numeric" pattern="[0-9]*"
+                                class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
+                                value="{{ old('phone_number') }}" required autocomplete="email"
+                                placeholder="Masukkan nomor telephone anda!">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password </label>
                             <div class="input-group">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password" required
@@ -81,7 +96,8 @@
                         @if (Route::has('login'))
                             <div class="text-center mt-3">
                                 <span>Sudah punya akun?</span>
-                                <a class="text-decoration-none" href="{{ route('login') }}" style="color: black; font-weight: bold">
+                                <a class="text-decoration-none" href="{{ route('login') }}"
+                                    style="color: black; font-weight: bold">
                                     Masuk
                                 </a>
                             </div>
