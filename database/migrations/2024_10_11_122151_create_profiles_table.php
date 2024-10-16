@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('galeris', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slogan');
-            $table->text('deskripsi');
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('galeris');
+        Schema::dropIfExists('profiles');
     }
 };

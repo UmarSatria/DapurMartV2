@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $totaluser = User::where('role', 'use   r')->count();
+        $totaluser = User::where('role', 'user')->count();
         $totalbarang = Barang::count();
         $totalpesanan = Pesanan::count();
         $gallery = Galeri::all();

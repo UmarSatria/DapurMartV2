@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\ChartController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\FilterKategoriController;
-use App\Http\Controllers\GaleriController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\PesananController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\SosmedController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\SosmedController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\FilterKategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('shop', ShopController::class);
     Route::resource('chart', ChartController::class);
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
 });
 

@@ -48,14 +48,14 @@
                             class="text-white">DapurMart@rpl.co.id</a></small>
                 </div>
                 <div class="top-link pe-2">
-                    @foreach ($sosmed as $sosm)
+                    {{-- @foreach ($sosmed as $sosm)
                         <a href="#" class="text-white"><small
                                 class="text-white mx-2">{{ $sosm->twitter }}</small>|</a>
                         <a href="#" class="text-white"><small
                                 class="text-white mx-2">{{ $sosm->facebook }}</small>|</a>
                         <a href="#" class="text-white"><small
                                 class="text-white ms-2">{{ $sosm->pinterest }}</small></a>
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
                                 <a href="404.html" class="dropdown-item">404 Page</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        {{-- <a href="contact.html" class="nav-item nav-link">Contact</a> --}}
                     </div>
                     <div class="d-flex m-3 me-0">
                         <button
@@ -96,9 +96,28 @@
                                 class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                                 style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                         </a>
-                        <a href="#" class="my-auto">
-                            <i class="fas fa-user fa-2x"></i>
-                        </a>
+                        <div class="dropdown my-auto">
+                            <a href="#" class="my-auto" id="dropdownMenuButton" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user fa-2x"></i>
+                            </a>
+
+                            <!-- Dropdown Menu -->
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                                <li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a class="dropdown-item" href="#" id="logoutButton"
+                                        onclick="event.preventDefault();">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -227,6 +246,29 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('logoutButton').addEventListener('click', function(e) {
+            e.preventDefault(); // Mencegah logout langsung
+
+            // Tampilkan SweetAlert untuk konfirmasi logout
+            Swal.fire({
+                title: 'Yakin mau logout?',
+                text: "Belanja aja dulu, logoutnya nanti aja gapapa.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Logout',
+                cancelButtonText: 'nanti aja deh'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika user menekan tombol "Logout", submit form logout
+                    document.getElementById('logout-form').submit();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

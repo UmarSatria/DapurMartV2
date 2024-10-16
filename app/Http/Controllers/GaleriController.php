@@ -31,7 +31,7 @@ class GaleriController extends Controller
     {
         $request->validate([
             'title' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'slogan' => 'required|string',
             'deskripsi' => 'required|string',
         ], [

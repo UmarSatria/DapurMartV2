@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-
 
 class RegisterController extends Controller
 {
@@ -53,8 +52,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'fullname' => ['nullable3', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
+            'phone_number' => ['nullable', 'string', 'max:20', 'regex:/^[\+0-9\-\(\)\s]*$/', 'unique:users'], // nullable phone_number
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'photo_profile' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'], // nullable photo_profile
         ]);
     }
 
