@@ -20,18 +20,19 @@ class ProfileController extends Controller
         $user = Auth::user();
         return view('layouts.pages.profile', compact('user'));
     }
-    
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+
+    }
+
+    public function alamat(Request $request)
+    {
+        $user = Auth::user();
+        return view('layouts.pages.alamat', compact('user'));
     }
 
     /**

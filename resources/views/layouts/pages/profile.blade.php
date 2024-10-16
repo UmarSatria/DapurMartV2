@@ -19,7 +19,7 @@
                         <i class="fas fa-user text-gray-400"></i>
                     </div>
                     <div class="ml-4">
-                        <div class="font-semibold">{{ $user->name }}</div>
+                        <div class="font-semibold">{{ $user->fullname }}</div>
                         <a href="#" class="text-blue-500 text-sm">Ubah Profil</a>
                     </div>
                 </div>
@@ -31,8 +31,7 @@
                             </a>
                             <ul class="ml-6 mt-2">
                                 <li class="mb-2"><a href="#" class="text-blue-500">Profil</a></li>
-                                <li class="mb-2"><a href="#" class="text-gray-600">Bank & Kartu</a></li>
-                                <li class="mb-2"><a href="#" class="text-gray-600">Alamat</a></li>
+                                <li class="mb-2"><a href="/alamat" class="text-gray-600">Alamat</a></li>
                                 <li class="mb-2"><a href="#" class="text-gray-600">Ubah Password</a></li>
                                 <li class="mb-2"><a href="#" class="text-gray-600">Pengaturan Notifikasi</a></li>
                                 <li class="mb-2"><a href="#" class="text-gray-600">Pengaturan Privasi</a></li>
@@ -62,7 +61,7 @@
                 </nav>
             </div>
             <!-- Main Content -->
-            <form class="w-3/4 bg-white p-6 ml-4" action=""  method="post" enctype="multipart/form-data">
+            <form class="w-3/4 bg-white p-6 ml-4" action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <h2 class="text-xl font-semibold mb-4">Profil Saya</h2>
@@ -71,30 +70,25 @@
                 <div class="flex">
                     <div class="w-2/3">
                         <div class="mb-4">
-                            <label class="block text-gray-700">Username</label>
-                            <input type="text" class="w-full p-2 border border-gray-300 rounded" value="strm2zqdy0"
-                                disabled>
-                            <p class="text-gray-500 text-sm">Username hanya dapat diubah satu (1) kali.</p>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700">Nama</label>
+                            <label class="block text-gray-700">Nama Lengkap</label>
                             <input type="text" class="w-full p-2 border border-gray-300 rounded"
-                                value="Umar Zaki Satria">
+                                value="{{ $user->fullname }}" readonly>
+                            <p class="text-gray-500 text-sm">Username hanya dapat diubah satu (1) kali.</p>
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700">Email</label>
                             <input type="email" class="w-full p-2 border border-gray-300 rounded"
-                                value="{{ $user->email }}">
+                                value="{{ $user->email }}" readonly>
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700">Nomor Telepon</label>
                             <div class="flex items-center">
-                                <input type="text" class="w-full p-2 border border-gray-300 rounded" value="**********89"
-                                    disabled>
+                                <input type="text" class="w-full p-2 border border-gray-300 rounded"
+                                    value="{{ $user->phone_number }}" readonly>
                                 <a href="#" class="text-blue-500 ml-2">Ubah</a>
                             </div>
                         </div>
-                        <div class="mb-4">
+                        {{-- <div class="mb-4">
                             <label class="block text-gray-700">Nama Toko</label>
                             <input type="text" class="w-full p-2 border border-gray-300 rounded"
                                 value="toko anda belum terdaftarkan">
@@ -106,8 +100,8 @@
                                 <input type="radio" name="gender" class="ml-4 mr-2"> Perempuan
                                 <input type="radio" name="gender" class="ml-4 mr-2"> Lainnya
                             </div>
-                        </div>
-                        <div class="mb-4">
+                        </div> --}}
+                        {{-- <div class="mb-4">
                             <label class="block text-gray-700">Tanggal lahir</label>
                             <div class="flex">
                                 <select class="p-2 border border-gray-300 rounded mr-2">
@@ -120,17 +114,21 @@
                                     <option>2024</option>
                                 </select>
                             </div>
-                        </div>
-                        <button class="bg-orange-500 text-white px-4 py-2 rounded">Simpan</button>
+                        </div> --}}
+                        <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded">Simpan</button>
                     </div>
                     <div class="w-1/3 flex flex-col items-center">
                         <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
                             <i class="fas fa-user text-gray-400 text-4xl"></i>
                         </div>
-                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded">Pilih Gambar</button>
+
+                        <input type="file" class="opacity-0 absolute" id="fileInput">
+                        <label for="fileInput" class="bg-gray-200 text-gray-700 px-4 py-2 rounded cursor-pointer">Pilih
+                            Gambar</label>
                         <p class="text-gray-500 text-sm mt-2">Ukuran gambar: maks. 1 MB</p>
                         <p class="text-gray-500 text-sm">Format gambar: .JPEG, .PNG</p>
                     </div>
+
                 </div>
             </form>
         </div>
