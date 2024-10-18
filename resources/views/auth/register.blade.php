@@ -61,18 +61,14 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-<<<<<<< Updated upstream
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password </label>
-=======
-                            
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password *</label>
->>>>>>> Stashed changes
                             <div class="input-group">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password" required

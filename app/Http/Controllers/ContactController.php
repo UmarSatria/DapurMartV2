@@ -29,7 +29,15 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'message' => 'required|string',
+        ]);
+
+        Contact::create($store);
+        
+        return redirect()->back()->with('success', 'Pesan terkirim');
     }
 
     /**
