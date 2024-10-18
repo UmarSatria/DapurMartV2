@@ -10,6 +10,7 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\SosmedController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
@@ -35,6 +36,10 @@ Auth::routes(['verify' => true]);
 
 Route::resource('grosir', UserController::class)->middleware('verified');
 Route::resource('welcome', Controller::class);
+
+// CONTACT
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::resource('contact', ContactController::class);
 
 Route::group(['middleware' => ['auth']], function () {
 
