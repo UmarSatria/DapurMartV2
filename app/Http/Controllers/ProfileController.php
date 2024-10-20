@@ -38,6 +38,9 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
+
+
+
     public function show(Profile $profile)
     {
         //
@@ -54,10 +57,35 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'photo_profile' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        if ($request->hasFile('photo_profile')) {
+            $file = $request->file('photo_profile');
+            $path = $file->store('profile_photos', 'public');
+
+            // Hapus gambar lama jika ada
+            if ($user->photo_profile && \Storage::exists('public/'.$user->photo_profile)) {
+                \Storage::delete('public/'.$user->photo_profile);
+            }
+
+            // Simpan path gambar baru ke dalam database
+            $user->photo_profile = $path;
+        }
+
+        // Simpan perubahan pada user
+        $user->save();
+
+        // Redirect kembali ke halaman profile.show dengan pesan sukses
+        return redirect()->route('profile', $user->id)->with('success', 'Profile updated successfully');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

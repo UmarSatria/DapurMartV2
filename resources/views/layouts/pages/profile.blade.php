@@ -61,9 +61,10 @@
                 </nav>
             </div>
             <!-- Main Content -->
-            <form class="w-3/4 bg-white p-6 ml-4" action="" method="POST" enctype="multipart/form-data">
+            <form class="w-3/4 bg-white p-6 ml-4" action="{{ route('profile.update', $user->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <h2 class="text-xl font-semibold mb-4">Profil Saya</h2>
                 <p class="text-gray-600 mb-6">Kelola informasi profil Anda untuk mengontrol, melindungi dan mengamankan akun
                 </p>
@@ -115,23 +116,60 @@
                                 </select>
                             </div>
                         </div> --}}
-                        <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded">Simpan</button>
+                        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Simpan</button>
                     </div>
                     <div class="w-1/3 flex flex-col items-center">
-                        <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
-                            <i class="fas fa-user text-gray-400 text-4xl"></i>
+                        <div
+                            class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4 overflow-hidden">
+                            @if ($user->photo_profile)
+                                <img src="{{ Storage::url($user->photo_profile) }}" alt="Photo Profile"
+                                    class="w-full h-full object-cover">
+                            @else
+                                <i class="fas fa-user text-gray-400 text-4xl"></i>
+                            @endif
                         </div>
 
-                        <input type="file" class="opacity-0 absolute" id="fileInput">
-                        <label for="fileInput" class="bg-gray-200 text-gray-700 px-4 py-2 rounded cursor-pointer">Pilih
-                            Gambar</label>
-                        <p class="text-gray-500 text-sm mt-2">Ukuran gambar: maks. 1 MB</p>
-                        <p class="text-gray-500 text-sm">Format gambar: .JPEG, .PNG</p>
-                    </div>
+                        <input type="file" class="opacity-0 absolute" id="fileInput" name="photo_profile"
+                            onclick="openModal()">
+                        <label for="fileInput" class="bg-gray-200 text-gray-700 px-4 py-2 rounded cursor-pointer">
+                            {{ $user->photo_profile ? 'Ingin merubah gambar?' : 'Pilih Gambar' }}
+                        </label>
 
+                        <p class="text-gray-500 text-sm mt-2">Ukuran gambar: maks. 20 MB</p>
+                        <p class="text-gray-500 text-sm">Format gambar: JPEG, PNG, JPEG, SVG</p>
+                    </div>
                 </div>
             </form>
         </div>
+
+        <!-- Modal untuk Upload Gambar Baru -->
+        <div id="uploadModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center hidden">
+            <div class="bg-white p-6 rounded-lg w-1/3">
+                <h3 class="text-lg font-semibold mb-4">Upload Gambar Baru</h3>
+                <form action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-4">
+                        <input type="file" name="photo_profile" class="w-full p-2 border border-gray-300 rounded">
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+                            onclick="closeModal()">Batal</button>
+                        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            function openModal() {
+                document.getElementById('uploadModal').classList.remove('hidden');
+            }
+
+            function closeModal() {
+                document.getElementById('uploadModal').classList.add('hidden');
+            }
+        </script>
     </body>
 
     </html>

@@ -19,7 +19,6 @@
                                 <li><a href="{{ route('kategori.show', $item->id) }}">{{ $item->kategori }}</a>
                                 </li>
                             @endforeach
-
                         </ul>
                     </div>
                 </div>

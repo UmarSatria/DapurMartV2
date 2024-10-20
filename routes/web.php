@@ -45,6 +45,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('shop', ShopController::class);
     Route::resource('chart', ChartController::class);
+
+    // USER PROFILE
+    Route::resource('profile', ProfileController::class);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/alamat', [ProfileController::class, 'alamat'])->name('alamat');
 
