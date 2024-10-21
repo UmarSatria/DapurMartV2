@@ -1,21 +1,20 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ChartController;
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\GaleriController;
-use App\Http\Controllers\SosmedController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PesananController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\FilterKategoriController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SosmedController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +42,7 @@ Route::resource('contact', ContactController::class);
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop.page');
     Route::resource('shop', ShopController::class);
     Route::resource('chart', ChartController::class);
 
@@ -50,6 +50,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('profile', ProfileController::class);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/alamat', [ProfileController::class, 'alamat'])->name('alamat');
+    Route::get('/sell', function () {
+        return view('layouts.pages.seller.sell');
+    });
 
 });
 
@@ -81,6 +84,4 @@ Route::resource('pembayaran', PembayaranController::class);
 Route::get('pesanan/{id}/edit-status', 'PesananController@editStatus')->name('pesanan.editStatus');
 Route::put('pesanan/{id}/update-status', [PesananController::class, 'updateSgtatus'])->name('update_status');
 
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified');
-

@@ -8,6 +8,10 @@
         <title>Profile Page</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+        {{-- font --}}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
 
     <body class="bg-gray-100">
@@ -50,6 +54,11 @@
                         <li class="mb-4">
                             <a href="#" class="flex items-center text-gray-600">
                                 <i class="fas fa-ticket-alt mr-2"></i> Voucher Saya
+                            </a>
+                        </li>
+                        <li class="mb-4">
+                            <a href="/sell" class="flex items-center text-gray-600" style="display: flex; gap: 7px;">
+                                <i class="fa-solid fa-industry"></i> Ingin berjualan?
                             </a>
                         </li>
                         {{-- <li class="mb-4">
@@ -116,7 +125,7 @@
                                 </select>
                             </div>
                         </div> --}}
-                        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Simpan</button>
+                        <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded">Simpan</button>
                     </div>
                     <div class="w-1/3 flex flex-col items-center">
                         <div
