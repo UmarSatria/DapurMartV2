@@ -78,6 +78,11 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::delete('/sosmed/{sosmed}', [SosmedController::class, 'destroy'])->name('sosmed.destroy');
 });
 
+// Route seller
+Route::middleware(['auth', 'role:Seller'])->group(function () {
+    Route::get('/seller', [SellerController::class, 'index'])->name('seller');
+});
+
 Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
 Route::resource('pembayaran', PembayaranController::class);
 

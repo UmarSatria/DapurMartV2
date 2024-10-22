@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone_number',
         'password',
         'photo_profile',
+        'role',
     ];
 
     /**
@@ -48,5 +49,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
-}
+    public static function boot()
+    {
+        parent::boot();
 
+        static::creating(function ($user) {
+            if (empty($user->role)) {
+                $user->role = 'User';
+            }
+        });
+    }
+}
