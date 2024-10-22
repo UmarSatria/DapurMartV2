@@ -69,7 +69,7 @@
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password" required
                                     autocomplete="new-password" placeholder="Masukkan password Anda">
-                                <span class="input-group-text">
+                                 <span class="input-group-text">
                                     <i class="fas fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                                 </span>
                             </div>
