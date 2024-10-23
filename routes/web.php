@@ -51,10 +51,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('profile', ProfileController::class);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/alamat', [ProfileController::class, 'alamat'])->name('alamat');
-    Route::get('/sell', function () {
-        return view('layouts.pages.seller.sell');
-    });
-
+    Route::get('/sell', [SellerController::class, 'index'])->name('sell');
+    Route::resource('sell', SellerController::class);
 });
 
 // login admin
@@ -81,8 +79,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
 // Route seller
 Route::middleware(['auth', 'role:Seller'])->group(function () {
-    Route::resource('seller', SellerController::class);
-    Route::get('/dashboardSeller', [SellerController::class, 'index'])->name('seller.dashboard');
+    Route::get('/dashboardseller', [DashboardSeller::class, 'index'])->name('seller.dashboard');
 });
 
 Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
