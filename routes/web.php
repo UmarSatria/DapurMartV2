@@ -10,6 +10,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SosmedController;
 use App\Http\Controllers\UserController;
@@ -80,7 +81,8 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
 // Route seller
 Route::middleware(['auth', 'role:Seller'])->group(function () {
-    Route::get('/seller', [SellerController::class, 'index'])->name('seller');
+    Route::resource('seller', SellerController::class);
+    Route::get('/dashboardSeller', [SellerController::class, 'index'])->name('seller.dashboard');
 });
 
 Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');

@@ -12,7 +12,7 @@ class SellerController extends Controller
      */
     public function index()
     {
-        return view('layouts.pages.seller.add_seller');
+        return view('layouts.pages.seller.dashboard_seller');
     }
 
     /**
@@ -32,7 +32,7 @@ class SellerController extends Controller
             'store_name' => 'required|string|max:40',
             'store_icon' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'slogan' => 'nullable|string|max:100',
-            'store_description' => 'nullable|string|max:200',
+            'store_description' => 'nullable|s.tring|max:200',
             'store_address' => 'nullable|string|max:200',
         ]);
 
@@ -55,7 +55,7 @@ class SellerController extends Controller
         $user->role = 'Seller';
         $user->save();
 
-        return redirect()->route('seller.dashboard')->with('success', 'Toko berhasil didaftarkan!');
+        return redirect()->route('/dashboardSeller')->with('success', 'Toko berhasil didaftarkan!');
 
     }
 
