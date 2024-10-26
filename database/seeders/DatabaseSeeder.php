@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User; // Pastikan Anda mengimpor model User
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -15,8 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         // Uncomment and use User factory to create an admin user
         User::factory()->create([
-            'name' => 'Admin',
+            'photo_profile' =>  'default.jpg',
+            'fullname' => 'Admin',
             'email' => 'admin@gmail.com',
+            'phone_number' =>  '08123456789',
             'password' => Hash::make('12345678'),
             'role' => 'Admin',
         ]);

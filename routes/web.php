@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\ChartController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\GaleriController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\PesananController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SellerController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\SosmedController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\DashboardSeller;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SosmedController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+// redirect verify
 Route::resource('grosir', UserController::class)->middleware('verified');
 Route::resource('welcome', Controller::class);
 
@@ -78,7 +80,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 });
 
 // Route seller
-Route::middleware(['auth', 'role:Seller'])->group(function () {
+Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/dashboardseller', [DashboardSeller::class, 'index'])->name('seller.dashboard');
 });
 

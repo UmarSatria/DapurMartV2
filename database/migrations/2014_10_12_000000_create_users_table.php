@@ -20,7 +20,7 @@
                 $table->timestamp('email_verified_at')->nullable();
                 $table->string('password');
                 $table->rememberToken();
-                $table->enum('role', ['User', 'Seller', 'Admin'])->default('User');
+                $table->enum('role', ['User', 'Seller', 'Admin']);
                 $table->timestamps();
             });
         }

@@ -56,7 +56,6 @@ class SellerController extends Controller
                 'store_address' => $addSeller['store_address'],
             ]);
         } catch (\Exception $e) {
-            // Tampilkan error jika ada yang tidak berhasil
             return back()->withErrors(['msg' => 'Gagal menyimpan data: ' . $e->getMessage()]);
         }
 

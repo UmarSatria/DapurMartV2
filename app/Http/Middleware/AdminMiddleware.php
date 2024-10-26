@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
+            'email_verified_at' => Carbon::now(), // Set email_verified_at agar dianggap terverifikasi
         ]);
 
         // Assign role to user

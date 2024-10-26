@@ -53,12 +53,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'fullname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone_number' => ['required', 'string', 'max:20', 'regex:/^[\+0-9\-\(\)\s]*$/', 'unique:users'], // nullable phone_number
+            'phone_number' => ['required', 'string', 'min:8', 'max:12', 'regex:/^[0-9]*$/', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'photo_profile' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'], // nullable photo_profile
         ]);
     }
-
     /**
      * Create a new user instance after a valid registration.
      *

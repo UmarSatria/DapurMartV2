@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
@@ -13,19 +12,24 @@ class CheckRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role)
-    {
-        // Pastikan pengguna sudah terautentikasi
-        if (!Auth::check()) {
-            return redirect()->route('login'); // Ganti dengan rute login Anda
-        }
+    public function handle(Request $request, Closure $next, ...$roles)
+{
+    if (!Auth::check()) {
+        return redirect()->route('login'); // Jika belum login
+    }
 
-        // Cek role pengguna
-        if (Auth::user()->role === $role) {
-            return $next($request);
-        }
+    $user = Auth::user();
 
-        // Redirect atau abort jika role tidak cocok
+    // Log informasi role untuk debugging
+    \Log::info('User role:', ['user_role' => $user->role, 'required_roles' => $roles]);
+
+    // Debugging untuk role
+    if (!in_array($user->role, $roles)) {
+        \Log::error('Unauthorized access attempt', ['user_role' => $user->role]);
         abort(403, 'Unauthorized');
     }
+
+    return $next($request);
+}
+
 }

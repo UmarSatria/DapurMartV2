@@ -30,8 +30,8 @@
                             <input id="fullname" type="text"
                                 class="form-control @error('fullname') is-invalid @enderror" name="fullname"
                                 value="{{ old('fullname') }}" required autocomplete="name" autofocus
-                                placeholder="Masukkan nama Lengkap Anda">
-                            @error('name')
+                                placeholder="Masukkan nama lengkap Anda">
+                            @error('fullname')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email </label>
+                            <label for="email" class="form-label">Email</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                 name="email" value="{{ old('email') }}" required autocomplete="email"
                                 placeholder="Masukkan alamat email Anda">
@@ -51,12 +51,18 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="phone_number" class="form-label">Phone Number</label>
-                            <input id="phone_number" type="text" inputmode="numeric" pattern="[0-9]*"
-                                class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                                value="{{ old('phone_number') }}" required autocomplete="email"
-                                placeholder="Masukkan nomor telephone anda!">
-                            @error('email')
+                            <label for="phone_number" class="form-label">Nomor Telepon</label>
+                            <div class="input-group">
+                                <input id="phone_number" type="text" inputmode="numeric" pattern="[0-9]{8,12}"
+                                    class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
+                                    value="{{ old('phone_number') }}" required
+                                    placeholder="Masukkan nomor telepon Anda (8-12 digit)">
+                                <span class="input-group-text">
+                                    <i class="fas fa-check" id="checkPhoneNumber" style="color: green; display: none;"></i>
+                                    <i class="fas fa-times" id="wrongPhoneNumber" style="color: red; display: none;"></i>
+                                </span>
+                            </div>
+                            @error('phone_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -69,7 +75,7 @@
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password" required
                                     autocomplete="new-password" placeholder="Masukkan password Anda">
-                                 <span class="input-group-text">
+                                <span class="input-group-text">
                                     <i class="fas fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                                 </span>
                             </div>
@@ -87,9 +93,8 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn" style="background: #81C408; font-weight: semi-bold">
-                                Daftar
-                            </button>
+                            <button type="submit" class="btn"
+                                style="background: #81C408; font-weight: semi-bold">Daftar</button>
                         </div>
 
                         @if (Route::has('login'))
@@ -102,6 +107,7 @@
                             </div>
                         @endif
                     </form>
+
                 </div>
 
                 <!-- Right Image Section -->
@@ -125,6 +131,26 @@
 
                 // toggle the icon
                 this.classList.toggle("fa-eye-slash");
+            });
+
+
+            const phoneNumberInput = document.getElementById('phone_number');
+            const checkIcon = document.getElementById('checkPhoneNumber');
+            const wrongIcon = document.getElementById('wrongPhoneNumber');
+
+            phoneNumberInput.addEventListener('input', function() {
+                const value = phoneNumberInput.value;
+
+                if (value.length > 0 && (value.length < 8 || value.length > 12)) {
+                    wrongIcon.style.display = 'inline'; // Show wrong icon if input is invalid
+                    checkIcon.style.display = 'none'; // Hide check icon
+                } else if (value.length >= 8 && value.length <= 12) {
+                    checkIcon.style.display = 'inline'; // Show check icon if valid
+                    wrongIcon.style.display = 'none'; // Hide wrong icon
+                } else {
+                    wrongIcon.style.display = 'inline'; // Always show wrong icon if typing starts but still invalid
+                    checkIcon.style.display = 'none'; // Hide check icon for invalid input
+                }
             });
         </script>
     </body>
