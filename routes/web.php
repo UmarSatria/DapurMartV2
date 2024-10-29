@@ -1,22 +1,22 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ChartController;
-use App\Http\Controllers\DashboardSeller;
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\GaleriController;
-use App\Http\Controllers\SellerController;
-use App\Http\Controllers\SosmedController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PesananController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\DashboardSeller;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SosmedController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +43,7 @@ Route::resource('welcome', Controller::class);
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::resource('contact', ContactController::class);
 
+// route user
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/shop', [ShopController::class, 'index'])->name('shop.page');
@@ -59,10 +60,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 // login admin
 Route::middleware(['auth', 'role:Admin'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified');
     Route::resource('home', HomeController::class);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('sosmed', SosmedController::class);
-    Route::resource('kategori', KategoriController::class);
     Route::resource('barang', BarangController::class);
 
     // GALERI
@@ -82,12 +83,15 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 // Route seller
 Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/dashboardseller', [DashboardSeller::class, 'index'])->name('seller.dashboard');
+
+    // barang dan kategori
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::resource('kategori', KategoriController::class);
+    Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
+
 });
 
-Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
 Route::resource('pembayaran', PembayaranController::class);
 
 Route::get('pesanan/{id}/edit-status', 'PesananController@editStatus')->name('pesanan.editStatus');
 Route::put('pesanan/{id}/update-status', [PesananController::class, 'updateSgtatus'])->name('update_status');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified');

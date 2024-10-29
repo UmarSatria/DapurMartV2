@@ -11,7 +11,6 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     protected $redirectTo = '/home';
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -21,12 +20,13 @@ class LoginController extends Controller
     {
         if ($user->hasRole('Admin')) {
             return redirect()->route('home');
-        } else if($user->hasRole('Seller')) {
+        } else if ($user->hasRole('Seller')) {
             return redirect()->route('seller.dashboard');
-        } else if($user->hasRole('User')) {
+        } else if ($user->hasRole('User')) {
             return redirect()->route('user.dashboard');
         }
 
-        return redirect($this->redirectTo);
+        // Jika peran tidak cocok, redirect ke halaman default
+        return redirect()->route('login');
     }
 }

@@ -10,26 +10,34 @@ class CheckRole
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  array  ...$roles  Daftar role yang diizinkan
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next, ...$roles)
-{
-    if (!Auth::check()) {
-        return redirect()->route('login'); // Jika belum login
+    {
+        // Cek apakah pengguna sudah login
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $user = Auth::user();
+
+        // Log informasi role untuk debugging
+        \Log::info('User role:', ['user_role' => $user->role, 'required_roles' => $roles]);
+
+        // Periksa apakah role pengguna ada dalam daftar role yang diizinkan
+        if (!in_array($user->role, $roles)) {
+            \Log::error('Unauthorized access attempt', [
+                'user_role' => $user->role,
+                'required_roles' => $roles,
+                'attempted_route' => $request->path()
+            ]);
+            abort(403, 'Unauthorized');
+        }
+
+        // Lanjutkan request jika role sesuai
+        return $next($request);
     }
-
-    $user = Auth::user();
-
-    // Log informasi role untuk debugging
-    \Log::info('User role:', ['user_role' => $user->role, 'required_roles' => $roles]);
-
-    // Debugging untuk role
-    if (!in_array($user->role, $roles)) {
-        \Log::error('Unauthorized access attempt', ['user_role' => $user->role]);
-        abort(403, 'Unauthorized');
-    }
-
-    return $next($request);
-}
-
 }

@@ -30,12 +30,12 @@ class UserAccess
             return $next($request); // Admin dapat mengakses semua halaman yang dibutuhkan
         }
 
-        if ($user->role === 'Seller' && !$request->routeIs('seller.dashboard')) {
-            return redirect()->route('seller.dashboard'); // Seller diarahkan ke dashboard seller jika bukan admin
+        if ($user->role === 'Seller' && $request->routeIs('seller.dashboard')) {
+            return $next($request);
         }
 
-        if ($user->role === 'User' && !$request->routeIs('grosir.index')) {
-            return redirect()->route('grosir.index'); // User diarahkan ke halaman yang sesuai
+        if ($user->role === 'User' && $request->routeIs('grosir.index')) {
+            return $next($request);
         }
 
         abort(403, 'Unauthorized');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class DashboardSeller extends Controller
@@ -11,7 +13,8 @@ class DashboardSeller extends Controller
      */
     public function index()
     {
-        return view('layouts.pages.seller.dashboard_seller');
+        $seller = Auth::user();
+        return view('layouts.pages.seller.dashboard_seller', compact('seller'));
         //
     }
 

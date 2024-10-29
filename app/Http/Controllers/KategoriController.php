@@ -24,7 +24,7 @@ class KategoriController extends Controller
 
         $data = $data->paginate(3);
 
-        return view('kategori', compact('data', 'search'));
+        return view('layouts.pages.seller.kategori', compact('data', 'search'));
     }
     /**
      * Show the form for creating a new resource.

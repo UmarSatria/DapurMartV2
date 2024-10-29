@@ -65,7 +65,7 @@ class SellerController extends Controller
         $user->save();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('seller.dashboard')->with('success', 'Toko berhasil didaftarkan!');
+        return redirect()->route('seller.dashboard')->with('success', 'Anda berhasil  menjadi penjual!');
     }
 
 
