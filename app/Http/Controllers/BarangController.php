@@ -47,35 +47,37 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         try {
+            // Validasi form
             $request->validate([
                 'gambar_produk' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'nama_produk' => 'required',
-                'harga_satuan' => 'required|numeric|min:1',
-                'stok' => 'required|numeric|min:1',
-                'deskripsi' => 'required',
-            ], [
-                'gambar_produk.required' => 'Data harus diisi',
-                'nama_produk.required' => 'Data harus diisi',
-                'harga_satuan.required' => 'Data harus diisi',
-                'harga_satuan.numeric' => 'Data harus berupa angka',
-                'harga_satuan.min' => 'Data tidak boleh kurang dari 1',
-                'stok.required' => 'Data harus diisi',
-                'stok.numeric' => 'Data harus berupa angka',
-                'stok.min' => 'Data tidak boleh kurang dari 1',
-                'deskripsi.required' => 'Data harus diisi',
+                'nama_produk' => 'required|string|max:255',
+                'deskripsi' => 'required|string',
+                'kategori_id' => 'required|exists:kategoris,id', // pastikan id kategori valid
+                'stok' => 'required|numeric|min:0',
+                'harga_per_gram' => 'required|numeric|min:0',
             ]);
 
-            $data = $request->all();
-            $gambar = $request->file('gambar_produk');
-            $data['gambar_produk'] = Str::random(20) . '.' . $gambar->getClientOriginalExtension();
-            Storage::disk('public')->put($data['gambar_produk'], file_get_contents($gambar));
+            // Menyiapkan data untuk disimpan
+            $data = $request->only(['nama_produk', 'deskripsi', 'kategori_id', 'stok', 'harga_per_gram']);
+
+            // Proses upload gambar produk
+            if ($request->hasFile('gambar_produk')) {
+                $gambar = $request->file('gambar_produk');
+                $data['gambar_produk'] = Str::random(20) . '.' . $gambar->getClientOriginalExtension();
+                Storage::disk('public')->put($data['gambar_produk'], file_get_contents($gambar));
+            }
+
+            // Menyimpan data barang ke dalam database
             Barang::create($data);
 
+            // Redirect ke halaman index dengan pesan sukses
             return redirect()->route('barang.index')->with('success', 'Data berhasil ditambahkan');
         } catch (QueryException $e) {
+            // Jika terjadi error, tampilkan pesan error
             return redirect()->back()->with('error', 'Gagal menambahkan data. Silakan coba lagi.');
         }
     }
+
 
     /**
      * Display the specified resource.

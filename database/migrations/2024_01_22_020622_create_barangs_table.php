@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('gambar_produk');
             $table->string('nama_produk');
-            $table->foreignId('kategori_id')->constrained();
-            $table->integer('harga_satuan');
-            $table->integer('stok');
             $table->string('deskripsi');
+            $table->foreignId('kategori_id')->constrained();
+            $table->integer('stok');
+            $table->integer('harga_per_gram');
             $table->timestamps();
         });
     }
