@@ -26,18 +26,24 @@ class UserAccess
 
         \Log::info('User role:', ['role' => $user->role, 'current_route' => $request->route()->getName()]);
 
+        // Periksa akses untuk setiap role
         if ($user->role === 'Admin') {
-            return $next($request); // Admin dapat mengakses semua halaman yang dibutuhkan
+            return $next($request); // Admin memiliki akses ke semua halaman
         }
 
-        if ($user->role === 'Seller' && $request->routeIs('seller.dashboard')) {
-            return $next($request);
+        if ($user->role === 'Seller') {
+            if ($request->routeIs('seller.dashboard') || $request->routeIs('barang.*')) {
+                return $next($request); // Seller hanya memiliki akses ke halaman mereka sendiri
+            }
         }
 
-        if ($user->role === 'User' && $request->routeIs('grosir.index')) {
-            return $next($request);
+        if ($user->role === 'User') {
+            if ($request->routeIs('grosir.index')) {
+                return $next($request); // User memiliki akses ke halaman grosir
+            }
         }
 
+        // Jika tidak sesuai dengan role, munculkan error Unauthorized
         abort(403, 'Unauthorized');
     }
 }

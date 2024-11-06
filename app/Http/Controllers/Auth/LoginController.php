@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +9,6 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/home';
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -18,15 +16,21 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        // Jika pengguna belum terverifikasi, arahkan ke halaman verifikasi
+        if (!$user->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
+        }
+
+        // Redireksi berdasarkan peran pengguna
         if ($user->hasRole('Admin')) {
-            return redirect()->route('home');
-        } else if ($user->hasRole('Seller')) {
+            return redirect('/home');
+        } elseif ($user->hasRole('Seller')) {
             return redirect()->route('seller.dashboard');
-        } else if ($user->hasRole('User')) {
+        } elseif ($user->hasRole('User')) {
             return redirect()->route('user.dashboard');
         }
 
         // Jika peran tidak cocok, redirect ke halaman default
-        return redirect()->route('login');
+        return redirect('/login');
     }
 }

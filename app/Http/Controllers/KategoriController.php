@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\KategoriRequest;
 use App\Models\Barang;
 use App\Models\Kategori;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KategoriController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -17,14 +19,13 @@ class KategoriController extends Controller
     {
         $search = $request->input('search');
         $data = Kategori::query();
-
         if ($search) {
             $data->where('kategori', 'like', '%' . $search . '%');
         }
 
         $data = $data->paginate(3);
 
-        return view('layouts.pages.seller.kategori', compact('data', 'search'));
+        return view('kategori', compact('data', 'search'));
     }
     /**
      * Show the form for creating a new resource.
@@ -39,8 +40,12 @@ class KategoriController extends Controller
      */
     public function store(KategoriRequest $request)
     {
+        $request->validate([
+            'kategori' => 'required|string',
+        ]);
+
         Kategori::create($request->all());
-        return to_route('kategori.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('kategori.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -49,7 +54,7 @@ class KategoriController extends Controller
     public function show(Kategori $kategori)
     {
         $barangs = Barang::where('kategori_id', $kategori->id)->get();
-        return view('filter-kategori', compact('kategori','barangs'));
+        return view('filter-kategori', compact('kategori', 'barangs'));
     }
 
     /**

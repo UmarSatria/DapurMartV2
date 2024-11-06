@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class BarangController extends Controller
 {
@@ -18,6 +19,7 @@ class BarangController extends Controller
      */
     public function index(Request $request)
     {
+        $seller = Auth::user();
         $search = $request->input('search');
         $query = Barang::query()->latest();
 
@@ -25,10 +27,10 @@ class BarangController extends Controller
             $query->where('nama_produk', 'like', '%' . $search . '%');
         }
 
-        $data = $query->paginate(3);    
+        $data = $query->paginate(3);
         $kategori = Kategori::all();
 
-        return view('barang', compact('data', 'kategori', 'search'));
+        return view('layouts.pages.seller.barang', compact('data', 'kategori', 'search', 'seller'));
     }
 
     /**

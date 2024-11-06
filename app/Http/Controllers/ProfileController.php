@@ -29,12 +29,6 @@ class ProfileController extends Controller
 
     }
 
-    public function alamat(Request $request)
-    {
-        $user = Auth::user();
-        return view('layouts.pages.alamat', compact('user'));
-    }
-
     /**
      * Display the specified resource.
      */

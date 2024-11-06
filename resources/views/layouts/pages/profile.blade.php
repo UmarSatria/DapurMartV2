@@ -35,10 +35,7 @@
                             </a>
                             <ul class="ml-6 mt-2">
                                 <li class="mb-2"><a href="#" class="text-blue-500">Profil</a></li>
-                                <li class="mb-2"><a href="/alamat" class="text-gray-600">Alamat</a></li>
-                                <li class="mb-2"><a href="#" class="text-gray-600">Ubah Password</a></li>
-                                <li class="mb-2"><a href="#" class="text-gray-600">Pengaturan Notifikasi</a></li>
-                                <li class="mb-2"><a href="#" class="text-gray-600">Pengaturan Privasi</a></li>
+                                <li class="mb-2"><a href="{{ route('alamat.index') }}" class="text-gray-600">Alamat</a></li>
                             </ul>
                         </li>
                         <li class="mb-4">
@@ -47,18 +44,13 @@
                             </a>
                         </li>
                         <li class="mb-4">
-                            <a href="#" class="flex items-center text-gray-600">
-                                <i class="fas fa-bell mr-2"></i> Notifikasi
-                            </a>
-                        </li>
-                        <li class="mb-4">
-                            <a href="#" class="flex items-center text-gray-600">
-                                <i class="fas fa-ticket-alt mr-2"></i> Voucher Saya
-                            </a>
-                        </li>
-                        <li class="mb-4">
                             <a href="/sell" class="flex items-center text-gray-600" style="display: flex; gap: 7px;">
                                 <i class="fa-solid fa-industry"></i> Ingin berjualan?
+                            </a>
+                        </li>
+                        <li class="mb-4">
+                            <a href="/grosir" class="flex items-center text-gray-600" style="display: flex; gap: 7px;">
+                                <i class="fa-solid fa-xmark"></i> Kembali
                             </a>
                         </li>
                         {{-- <li class="mb-4">
@@ -70,6 +62,7 @@
                 </nav>
             </div>
             <!-- Main Content -->
+
             <form class="w-3/4 bg-white p-6 ml-4" action="{{ route('profile.update', $user->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf

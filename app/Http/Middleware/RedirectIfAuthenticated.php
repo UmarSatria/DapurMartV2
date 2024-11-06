@@ -21,6 +21,18 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                $user = Auth::user();
+
+                // Redirect berdasarkan peran pengguna
+                if ($user->hasRole('Admin')) {
+                    return redirect()->route('home');
+                } elseif ($user->hasRole('Seller')) {
+                    return redirect()->route('seller.dashboard');
+                } elseif ($user->hasRole('User')) {
+                    return redirect()->route('user.dashboard');
+                }
+
+                // Jika peran tidak sesuai, redirect ke halaman default atau logout
                 return redirect(RouteServiceProvider::HOME);
             }
         }

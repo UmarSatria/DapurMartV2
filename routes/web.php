@@ -15,6 +15,7 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SosmedController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AlamatController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 // redirect verify
+Route::get('/grosir', [UserController::class, 'index'])->name('grosir.index');
 Route::resource('grosir', UserController::class)->middleware('verified');
 Route::resource('welcome', Controller::class);
 
@@ -53,18 +55,25 @@ Route::group(['middleware' => ['auth']], function () {
     // USER PROFILE
     Route::resource('profile', ProfileController::class);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/alamat', [ProfileController::class, 'alamat'])->name('alamat');
+    Route::get('/alamat', [AlamatController::class, 'index'])->name('alamat.index');
+    Route::resource('alamat', AlamatController::class);
+    Route::post('/alamat/bulk-delete', [AlamatController::class, 'bulkDelete'])->name('alamat.bulkDelete');
     Route::get('/sell', [SellerController::class, 'index'])->name('sell');
     Route::resource('sell', SellerController::class);
 });
 
 // login admin
 Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified');
+    Route::get('/home', [HomeController::class, 'index']);
     Route::resource('home', HomeController::class);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('sosmed', SosmedController::class);
-    Route::resource('barang', BarangController::class);
+
+    // kategori
+    // barang dan kategori
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::resource('kategori', KategoriController::class);
+    Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
 
     // GALERI
     Route::get('galeri/create', [GaleriController::class, 'create'])->name('galeri.create');
@@ -81,13 +90,11 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 });
 
 // Route seller
-Route::middleware(['auth', 'role'])->group(function () {
+Route::middleware(['auth', 'role:Seller'])->group(function () {
     Route::get('/dashboardseller', [DashboardSeller::class, 'index'])->name('seller.dashboard');
 
-    // barang dan kategori
-    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
-    Route::resource('kategori', KategoriController::class);
-    Route::get('kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
+    Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
+    Route::resource('barang', BarangController::class);
 
 });
 

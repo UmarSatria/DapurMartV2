@@ -106,20 +106,9 @@
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="/kategori">Category</a>
-                            </li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="pages/ui-features/dropdowns.html">Merchandise</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="/barang">Merchandise</a></li>
                         </ul>
                     </div>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="pages/forms/basic_elements.html">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-playlist-play"></i>
-                        </span>
-                        <span class="menu-title">Form Elements</span>
-                    </a>
                 </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="pages/tables/basic-table.html">
@@ -135,14 +124,6 @@
                             <i class="mdi mdi-chart-bar"></i>
                         </span>
                         <span class="menu-title">Charts</span>
-                    </a>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="pages/icons/mdi.html">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-contacts"></i>
-                        </span>
-                        <span class="menu-title">Icons</span>
                     </a>
                 </li>
                 <li class="nav-item menu-items">
@@ -168,15 +149,6 @@
                                 </a></li>
                         </ul>
                     </div>
-                </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link"
-                        href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-file-document-box"></i>
-                        </span>
-                        <span class="menu-title">Documentation</span>
-                    </a>
                 </li>
             </ul>
         </nav>
@@ -402,17 +374,6 @@
                     @yield('content')
                 </div>
                 <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                            bootstrapdash.com 2020</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                href="https://www.bootstrapdash.com/bootstrap-admin-template/"
-                                target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-                    </div>
-                </footer>
-                <!-- partial -->
             </div>
             <!-- main-panel ends -->
         </div>
