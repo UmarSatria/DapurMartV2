@@ -229,11 +229,21 @@
                             <label for="store_icon"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto
                                 Profil</label>
-                            <input type="file" name="store_icon" id="store_icon"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <input type="file" name="store_icon" id="store_icon" accept="image/*"
+                                onchange="previewImage(event)" class="hidden">
+                            <label for="store_icon"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg cursor-pointer hover:bg-gray-200 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                Pilih Foto
+                            </label>
                             @error('store_icon')
                                 <span class="text-red-600 text-sm">{{ $message }}</span>
                             @enderror
+
+                            <!-- Pratinjau Gambar -->
+                            <div id="preview-container" class="mt-4">
+                                <img id="preview-image" src="#" alt="Pratinjau Foto"
+                                    class="hidden rounded-lg border border-gray-300 w-32 h-32 object-cover">
+                            </div>
                         </div>
                         <div class="col-span-2">
                             <label for="store_description"
@@ -333,6 +343,21 @@
 
         // Memulai animasi saat halaman dimuat
         window.onload = typeWriter;
+
+        function previewImage(event) {
+            const previewContainer = document.getElementById('preview-container');
+            const previewImage = document.getElementById('preview-image');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
     </script>
 </body>
 

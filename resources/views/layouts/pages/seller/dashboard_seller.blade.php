@@ -37,7 +37,12 @@
                     <div class="profile-desc">
                         <div class="profile-pic">
                             <div class="count-indicator">
-                                <img class="img-xs rounded-circle " src="assets/images/faces/face15.jpg" alt="">
+                                @if ($seller)
+                                    <img src="{{ asset('storage/store_icons/' . $seller->store_icon) }}"
+                                        alt="Profil Toko" class="img-xs rounded-circle">
+                                @else
+                                <p>Data belum tersedia.</p>
+                                @endif
                                 <span class="count bg-success"></span>
                             </div>
                             <div class="profile-name">
@@ -107,6 +112,7 @@
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="/barang">Merchandise</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="seller//recap/merchandise">Recap Merchandise</a></li>
                         </ul>
                     </div>
                 </li>

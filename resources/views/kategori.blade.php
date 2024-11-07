@@ -57,7 +57,14 @@
                                     Kategori</label>
                                 <input type="text" name="kategori" id="kategori"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Type category name">
+                                    placeholder="Isi nama kategori">
+                            </div>
+                            <div class="col-span-2">
+                                <label for="satuan"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Satuan berat</label>
+                                <input type="text" name="satuan" id="satuan"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="(kg, gram) atau (pcs, paket,  dll)">
                             </div>
                         </div>
                         <button type="submit"
@@ -71,7 +78,6 @@
                             Add new category
                         </button>
                     </form>
-
                 </div>
             </div>
         </div>
@@ -85,7 +91,10 @@
                             ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            CATEGORY
+                            Kategori
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            MASSA (satuan berat)
                         </th>
                     </tr>
                 </thead>
@@ -99,6 +108,9 @@
                             </th>
                             <td class="px-6 py-4">
                                 {{ $item->kategori }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $item->satuan }}
                             </td>
                             <td class="px-6 py-4" style="display: flex; gap: 1px;">
                                 <button data-modal-target="update-modal-{{ $item->id }}"
@@ -177,6 +189,13 @@
                                 <input type="text" name="kategori" id="kategori"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Type category name" value="{{ old('kategori', $item->kategori) }}">
+                            </div>
+                            <div class="col-span-2">
+                                <label for="satuan"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Satuan berat</label>
+                                <input type="text" name="satuan" id="satuan"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="(kg, gram) atau (pcs, paket,  dll)" value="{{ old('satuan', $item->satuan) }}">
                             </div>
                         </div>
                         <button type="submit"

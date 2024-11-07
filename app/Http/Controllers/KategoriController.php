@@ -42,9 +42,13 @@ class KategoriController extends Controller
     {
         $request->validate([
             'kategori' => 'required|string',
+            'satuan' => 'required|string',
         ]);
 
-        Kategori::create($request->all());
+        Kategori::create([
+            'kategori' => $request->kategori,
+            'satuan' => $request->satuan,
+        ]);
         return redirect()->route('kategori.index')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -68,21 +72,23 @@ class KategoriController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(KategoriRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'kategori' => 'required',
+            'satuan' => 'required',
         ]);
 
         $kategori = Kategori::findOrFail($id);
 
-        // Update data
         $kategori->update([
-            'kategori' => $request->input('kategori'),
+            'kategori' => $request->kategori,
+            'satuan' => $request->satuan
         ]);
 
         return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui');
     }
+
 
     /**
      * Remove the specified resource from storage.

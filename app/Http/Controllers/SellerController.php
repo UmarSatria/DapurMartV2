@@ -18,6 +18,13 @@ class SellerController extends Controller
         return view('layouts.pages.seller.sell');
     }
 
+    public function showData()
+    {
+        $seller = Auth::user();
+        return view('layouts.pages.seller.dashboard_seller', compact('seller'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -68,7 +75,6 @@ class SellerController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('seller.dashboard')->with('success', 'Anda berhasil  menjadi penjual!');
     }
-
 
     /**
      * Display the specified resource.
