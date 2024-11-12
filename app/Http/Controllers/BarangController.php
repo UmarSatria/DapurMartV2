@@ -71,7 +71,7 @@ class BarangController extends Controller
                 'gambar_produk' => $gambarName, // Menyimpan hanya nama file (gambarName)
                 'nama_produk' => $request->nama_produk,
                 'deskripsi' => $request->deskripsi,
-                'kategori_id' => $request->kategori_id,
+            'kategori_id' => $request->kategori_id,
                 'stok' => $request->stok,
                 'harga_per_gram' => $request->harga_per_gram,
                 'seller_Id' => auth()->id(), // Menggunakan ID penjual yang sedang login

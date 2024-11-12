@@ -111,8 +111,6 @@
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="/barang">Merchandise</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="">Recap
-                                    Merchandise</a></li>
                         </ul>
                     </div>
                 </li>

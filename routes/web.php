@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/shop', [ShopController::class, 'index'])->name('shop.page');
     Route::resource('shop', ShopController::class);
-    Route::resource('chart', ChartController::class);
+    Route::resource('chart', ChartController::class)->middleware('auth');
 
     // USER PROFILE
     Route::resource('profile', ProfileController::class);
@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/alamat/bulk-delete', [AlamatController::class, 'bulkDelete'])->name('alamat.bulkDelete');
     Route::get('/sell', [SellerController::class, 'index'])->name('sell');
     Route::resource('sell', SellerController::class);
+    Route::get('/pesanan/user', [PesananController::class, 'index'])->name('pesanan.index');
+
 });
 
 // login admin
@@ -94,7 +96,6 @@ Route::middleware(['auth', 'role:Seller'])->group(function () {
     Route::get('/dashboardseller', [SellerController::class, 'seller'])->name('seller.dashboard');
     Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
     Route::resource('barang', BarangController::class);
-    Route::get('/recap/barang', [RecapBarangController::class, 'index'])->name('recap.index');
 });
 
 Route::resource('pembayaran', PembayaranController::class);

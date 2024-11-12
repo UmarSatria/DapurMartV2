@@ -71,7 +71,7 @@
                         <div class="d-flex">
                             <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                                 class="btn-get-started" type="button">
-                                Daftar aja deh!
+                                Daftar Sekarang!
                             </button>
                             {{-- <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
                                 class="glightbox btn-watch-video d-flex align-items-center"><i
@@ -87,40 +87,80 @@
             <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
                 <div class="container position-relative">
                     <div class="row gy-4 mt-5">
-
+            
                         <div class="col-xl-3 col-md-6">
                             <div class="icon-box">
-                                <div class="icon"><i class="bi bi-easel"></i></div>
-                                <h4 class="title"><a href="" class="stretched-link">Lorem Ipsum</a></h4>
+                                <div class="icon"><i class="bi bi-globe"></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Jangkauan Pasar yang Lebih Luas</a></h4>
+                            
                             </div>
-                        </div><!--End Icon Box -->
-
+                        </div><!-- End Icon Box -->
+            
                         <div class="col-xl-3 col-md-6">
                             <div class="icon-box">
-                                <div class="icon"><i class="bi bi-gem"></i></div>
-                                <h4 class="title"><a href="" class="stretched-link">Sed ut perspiciatis</a>
-                                </h4>
+                                <div class="icon"><i class="bi bi-cart-plus"></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Peningkatan Penjualan Secara Online</a></h4>
+                               
                             </div>
-                        </div><!--End Icon Box -->
-
+                        </div><!-- End Icon Box -->
+            
                         <div class="col-xl-3 col-md-6">
                             <div class="icon-box">
-                                <div class="icon"><i class="bi bi-geo-alt"></i></div>
-                                <h4 class="title"><a href="" class="stretched-link">Magni Dolores</a></h4>
+                                <div class="icon"><i class="bi bi-bar-chart-line"></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Data dan Laporan Penjualan Real-Time</a></h4>
+                                
                             </div>
-                        </div><!--End Icon Box -->
-
+                        </div><!-- End Icon Box -->
+            
                         <div class="col-xl-3 col-md-6">
                             <div class="icon-box">
-                                <div class="icon"><i class="bi bi-command"></i></div>
-                                <h4 class="title"><a href="" class="stretched-link">Nemo Enim</a></h4>
+                                <div class="icon"><i class="bi bi-headset"></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Layanan Dukungan Pelanggan</a></h4>
+                                
                             </div>
-                        </div><!--End Icon Box -->
-
+                        </div><!-- End Icon Box -->
+            
                     </div>
                 </div>
             </div>
 
+            {{-- PILIHEN DEWE SENG ATAS OPO BAWAH --}}
+
+            {{-- <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+                <div class="container position-relative">
+                    <div class="row gy-4 mt-5">
+            
+                        <div class="col-xl-3 col-md-6">
+                            <div class="icon-box">
+                                <div class="icon"><i class="bi bi-cart-check"></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Transaksi Mudah & Cepat</a></h4>
+                            </div>
+                        </div><!-- End Icon Box -->
+            
+                        <div class="col-xl-3 col-md-6">
+                            <div class="icon-box">
+                                <div class="icon"><i class="bi bi-people"></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Jangkauan Pelanggan Luas</a></h4>
+                            </div>
+                        </div><!-- End Icon Box -->
+            
+                        <div class="col-xl-3 col-md-6">
+                            <div class="icon-box">
+                                <div class="icon"><i class="bi bi-shield-lock"></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Pembayaran Aman</a></h4>
+                            </div>
+                        </div><!-- End Icon Box -->
+            
+                        <div class="col-xl-3 col-md-6">
+                            <div class="icon-box">
+                                <div class="icon"><i class="bi bi-bar-chart-line"></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Data Penjualan Real-Time</a></h4>
+                            </div>
+                        </div><!-- End Icon Box -->
+            
+                    </div>
+                </div>
+            </div>             --}}
         </section><!-- /Hero Section -->
 
         <!-- About Section -->
@@ -132,20 +172,17 @@
 
                     <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
                         <p class="who-we-are">Who We Are</p>
-                        <h3>Unleashing Potential with Creative Strategy</h3>
+                        <h3>“Bergabung Sebagai Mitra?" <br> "Dapatkan Fitur Unggulan dan Banyak Keuntungan!"</h3>
                         <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore
-                            magna aliqua.
+                            Inilah Beberapa Manfaat Luar Biasa yang Bisa Anda Nikmati dengan Menjadi Mitra Kami
                         </p>
                         <ul>
-                            <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat.</span></li>
-                            <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in
-                                    voluptate velit.</span></li>
-                            <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate trideta
-                                    storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Jangkauan Pasar yang Lebih Luas. </span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Peningkatan Penjualan Secara Online.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Data dan Laporan Penjualan Real-Time.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Layanan Dukungan Pelanggan.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Promosi dan Diskon Khusus.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Kemudahan dalam Pengelolaan Stok.</span></li>
                         </ul>
                         <a href="#" class="read-more"><span>Read More</span><i
                                 class="bi bi-arrow-right"></i></a>

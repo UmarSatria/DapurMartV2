@@ -10,6 +10,10 @@ class Chart extends Model
     use HasFactory;
 
     protected $table = 'charts';
+
+    protected $fillable = [
+        'barang_id', 'user_id'
+    ];
     protected $primaryKey = 'id';
     protected $guarded = ['id'];
     public $incrementing = true;

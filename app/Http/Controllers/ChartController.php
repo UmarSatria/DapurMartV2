@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
+
 
 class ChartController extends Controller
 {
@@ -21,9 +23,7 @@ class ChartController extends Controller
     {
 
         $cart = Chart::all();
-        $sosmed = Sosmed::all();
-
-        return view('chart', compact('cart', 'sosmed'));
+        return view('chart', compact('cart'));
     }
 
     /**
@@ -39,9 +39,12 @@ class ChartController extends Controller
      */
     public function store(Request $request)
     {
-        Chart::create($request->all());
-        return redirect()->back()->with('success', 'Berhasil ditambahkan ke keranjang');
+        $data = $request->all();
+        $data['user_id'] = Auth::id(); // Mendapatkan user_id dari pengguna yang sedang login
 
+        Chart::create($data);
+
+        return redirect()->back()->with('success', 'Berhasil ditambahkan ke keranjang');
     }
 
     /**
@@ -97,13 +100,12 @@ class ChartController extends Controller
         }
 
         $carts = $request->all();
-        $carts['barang_id'] = $cart->barang_id; 
+        $carts['barang_id'] = $cart->barang_id;
         $carts['total'] = $request->jumlah_pembelian * $cart->barang->harga_satuan;
 
         Pesanan::create($carts);
 
         $cart->delete();
         return redirect()->route('pesanan.index')->with('success', 'Pemesanan Berhasil');
-
     }
 }

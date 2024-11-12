@@ -92,26 +92,31 @@
         {{-- data barang --}}
         <div class="row">
             @foreach ($data as $item)
-                <div class="col-md-4 mb-4">
-                    <div class="card text-white bg-dark shadow-sm" style="border-radius: 10px;">
-                        <img class="card-img-top" src="{{ asset('storage/' . $item->gambar_produk) }}" alt="Gambar Produk"
-                        style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ $item->nama_produk }}</h4>
-                            <p class="card-text">{{ Str::limit($item->deskripsi, 50) }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Kategori: {{ $item->kategori->kategori }} ( {{ $item->kategori->satuan }} )</small>
-                                <small class="text-muted">Stok: {{ $item->stok }}</small>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-2">
-                                <span class="text-white font-weight-bold">Rp
-                                    {{ number_format($item->harga_per_gram, 0, ',', '.') }}</span>
-                                <a href="{{ route('barang.show', $item->id) }}" class="btn btn-primary btn-sm">Detail</a>
-                            </div>
+            <div class="col-md-4 mb-4" style="margin-left: 14.2px">
+                <div class="card text-white bg-dark shadow-sm" style="border-radius: 10px;">
+                    <img class="card-img-top" 
+                        src="{{ asset('storage/' . $item->gambar_produk) }}" 
+                        alt="Gambar Produk"
+                        style="border-top-left-radius: 10px; border-top-right-radius: 10px; 
+                        width: 100%; height: 20rem; object-fit: cover;">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ $item->nama_produk }}</h4>
+                        <p class="card-text">{{ Str::limit($item->deskripsi, 50) }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Kategori: {{ $item->kategori->kategori }} (
+                                {{ $item->kategori->satuan }} )</small>
+                            <small class="text-muted">Stok: {{ $item->stok }}</small>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <span class="text-white font-weight-bold">Rp
+                                {{ number_format($item->harga_per_gram, 0, ',', '.') }}</span>
+                            <a href="{{ route('barang.show', $item->id) }}" class="btn btn-primary btn-sm">Detail</a>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            </div>
+        @endforeach
+        
         </div>
 
         <!-- Pagination Links -->
