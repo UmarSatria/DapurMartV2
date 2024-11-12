@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Sosmed;
-
+use App\Models\Seller;
+use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
@@ -18,14 +18,19 @@ class ShopController extends Controller
         $query = $request->input('search');
 
         if ($query) {
-            $shops = Barang::where('nama_produk', 'like', '%' . $query . '%')->paginate(3);
+            // Cari barang berdasarkan nama produk dan sertakan informasi seller
+            $shops = Barang::with('seller', 'kategori') // Sertakan relasi seller dan kategori
+                            ->where('nama_produk', 'like', '%' . $query . '%')
+                            ->paginate(3);
         } else {
-            $shops = Barang::paginate(3);
+            // Ambil semua barang dan sertakan informasi seller
+            $shops = Barang::with('seller', 'kategori')->paginate(3);
         }
 
         return view('shop', compact('shops', 'query', 'sosmed'));
-
     }
+
+
 
     /**
      * Show the form for creating a new resource.

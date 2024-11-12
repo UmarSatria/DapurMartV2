@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('charts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barang_id')->constrained();
+            $table->foreignId('barang_id')->constrained('barangs');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

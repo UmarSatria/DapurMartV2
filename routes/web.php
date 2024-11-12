@@ -91,11 +91,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
 // Route seller
 Route::middleware(['auth', 'role:Seller'])->group(function () {
-    Route::get('/dashboardseller', [SellerController::class, 'showData'])->name('seller.dashboard');
-
+    Route::get('/dashboardseller', [SellerController::class, 'seller'])->name('seller.dashboard');
     Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
     Route::resource('barang', BarangController::class);
-
+    Route::get('/recap/barang', [RecapBarangController::class, 'index'])->name('recap.index');
 });
 
 Route::resource('pembayaran', PembayaranController::class);

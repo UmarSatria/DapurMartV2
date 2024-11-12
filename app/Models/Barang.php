@@ -30,4 +30,7 @@ class Barang extends Model
         return $this->hasMany(Pesanan::class);
     }
 
+    public function seller() {
+        return $this->belongsTo(Seller::class, 'seller_id');
+    }
 }

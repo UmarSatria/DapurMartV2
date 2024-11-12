@@ -27,6 +27,18 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        <!-- Alert for Errors -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Terdapat kesalahan pada login. Silakan coba lagi.</strong>
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <!-- Email Input -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Email *</label>
@@ -76,8 +88,7 @@
 
                         <!-- Submit Button -->
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn"
-                                style="background: #81C408; font-weight: semi-bold">
+                            <button type="submit" class="btn" style="background: #81C408; font-weight: semi-bold">
                                 {{ __('Masuk') }}
                             </button>
                         </div>
@@ -93,6 +104,7 @@
                             </div>
                         @endif
                     </form>
+
                 </div>
 
                 <!-- Image Section -->

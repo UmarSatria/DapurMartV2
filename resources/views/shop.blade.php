@@ -220,27 +220,35 @@
                         </div>
                         <div class="col-lg-9">
                             <div class="row g-4 justify-content-center">
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top"
-                                                alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                            style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Grapes</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te
-                                                incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#"
-                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                @foreach ($shops as $item)
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card text-white bg-dark shadow-sm" style="border-radius: 10px;">
+                                            <img class="card-img-top" src="{{ asset('storage/' . $item->gambar_produk) }}"
+                                                alt="Gambar Produk"
+                                                style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{ $item->nama_produk }}</h4>
+                                                <p class="card-text">{{ Str::limit($item->deskripsi, 50) }}</p>
+                                                <!-- Nama toko dari Seller -->
+                                                <p class="card-text">Dijual oleh:
+                                                    {{ $item->seller->store_name ?? 'Tidak diketahui' }}</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <small class="text-muted">Kategori:
+                                                        {{ $item->kategori->kategori ?? 'Tidak ada kategori' }}
+                                                        ({{ $item->kategori->satuan ?? '' }})</small>
+                                                    <small class="text-muted">Stok: {{ $item->stok }}</small>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                                    <span class="text-white font-weight-bold">Rp
+                                                        {{ number_format($item->harga_per_gram, 0, ',', '.') }}</span>
+                                                    <a href="{{ route('barang.show', $item->id) }}"
+                                                        class="btn btn-primary btn-sm">Detail</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
+
                                 <div class="col-md-6 col-lg-6 col-xl-4">
                                     <div class="rounded position-relative fruite-item">
                                         <div class="fruite-img">

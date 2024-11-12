@@ -32,8 +32,10 @@ class UserAccess
         }
 
         if ($user->role === 'Seller') {
-            if ($request->routeIs('seller.dashboard') || $request->routeIs('barang.*')) {
-                return $next($request); // Seller hanya memiliki akses ke halaman mereka sendiri
+            // Cek jika route yang diminta adalah salah satu dari route yang diizinkan untuk Seller
+            if ($request->routeIs('seller.dashboard') ||
+                $request->routeIs('barang.*')) {
+                return $next($request); // Seller memiliki akses ke halaman tersebut
             }
         }
 

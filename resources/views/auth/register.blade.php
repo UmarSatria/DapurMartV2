@@ -25,6 +25,19 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                        <!-- Alert for Errors -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Terjadi kesalahan pada input Anda:</strong>
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <!-- Fullname Input -->
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Nama Lengkap</label>
                             <input id="fullname" type="text"
@@ -38,6 +51,7 @@
                             @enderror
                         </div>
 
+                        <!-- Email Input -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -50,6 +64,7 @@
                             @enderror
                         </div>
 
+                        <!-- Phone Number Input -->
                         <div class="mb-3">
                             <label for="phone_number" class="form-label">Nomor Telepon</label>
                             <div class="input-group">
@@ -69,6 +84,7 @@
                             @enderror
                         </div>
 
+                        <!-- Password Input -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Password *</label>
                             <div class="input-group">
@@ -86,17 +102,21 @@
                             @enderror
                         </div>
 
+                        <!-- Password Confirmation Input -->
                         <div class="mb-3">
                             <label for="password-confirm" class="form-label">Konfirmasi Password *</label>
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                                 required autocomplete="new-password" placeholder="Konfirmasi password Anda">
                         </div>
 
+                        <!-- Submit Button -->
                         <div class="d-grid">
-                            <button type="submit" class="btn"
-                                style="background: #81C408; font-weight: semi-bold">Daftar</button>
+                            <button type="submit" class="btn" style="background: #81C408; font-weight: semi-bold">
+                                Daftar
+                            </button>
                         </div>
 
+                        <!-- Login Link -->
                         @if (Route::has('login'))
                             <div class="text-center mt-3">
                                 <span>Sudah punya akun?</span>
@@ -107,6 +127,7 @@
                             </div>
                         @endif
                     </form>
+
 
                 </div>
 

@@ -37,17 +37,16 @@
                     <div class="profile-desc">
                         <div class="profile-pic">
                             <div class="count-indicator">
-                                @if ($seller)
-                                    <img src="{{ asset('storage/store_icons/' . $seller->store_icon) }}"
-                                        alt="Profil Toko" class="img-xs rounded-circle">
-                                @else
-                                <p>Data belum tersedia.</p>
-                                @endif
                                 <span class="count bg-success"></span>
                             </div>
                             <div class="profile-name">
-                                <h5 class="mb-0 font-weight-normal">{{ $seller->fullname }}</h5>
-                                <span>{{ $seller->role }}</span>
+                                @if ($seller)
+                                    <h5 class="mb-0 font-weight-normal">{{ $seller->fullname }}</h5>
+                                    <span>{{ $seller->role }}</span>
+                                @else
+                                    <p>Data seller tidak ditemukan.</p>
+                                @endif
+
                             </div>
                         </div>
                         <a href="#" id="profile-dropdown" data-toggle="dropdown"><i
@@ -93,7 +92,7 @@
                     <span class="nav-link">Navigation</span>
                 </li>
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{{ route('seller.dashboard') }}">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer"></i>
                         </span>
@@ -112,7 +111,8 @@
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="/barang">Merchandise</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="seller//recap/merchandise">Recap Merchandise</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="">Recap
+                                    Merchandise</a></li>
                         </ul>
                     </div>
                 </li>

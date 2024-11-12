@@ -18,13 +18,11 @@ class SellerController extends Controller
         return view('layouts.pages.seller.sell');
     }
 
-    public function showData()
+    public function seller()
     {
         $seller = Auth::user();
         return view('layouts.pages.seller.dashboard_seller', compact('seller'));
     }
-
-
     /**
      * Show the form for creating a new resource.
      */
