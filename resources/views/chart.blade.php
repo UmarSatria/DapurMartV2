@@ -36,68 +36,71 @@
                                 <th scope="col">Harga</th>
                                 <th scope="col">Kuantitas</th>
                                 <th scope="col">Total</th>
-                                <th scope="col">H</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cart as $item)
-                                <tr>
-                                    <th scope="row">
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ asset('storage/' . $item->barang->gambar_produk) }}"
-                                                class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"
-                                                alt="">
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <p class="mb-0 mt-4">{{ $item->barang->nama_produk }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="mb-0 mt-4">Rp
-                                            {{ number_format($item->barang->harga_per_gram, 0, ',', '.') }}</p>
-                                    </td>
-                                    <td>
-                                        <div class="input-group quantity mt-4" style="width: 100px;">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
+                            @if ($cart->isEmpty())
+                                <p class="text-muted"><a href="{{ route('shop.index') }}" style="text-decoration: none; color: #222; font-weight: bold">Keranjang anda kosong nih, belanja yuk!</a></p>
+                            @else
+                                @foreach ($cart as $item)
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="d-flex align-items-center">
+                                                <img src="{{ asset('storage/' . $item->barang->gambar_produk) }}"
+                                                    class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"
+                                                    alt="">
                                             </div>
-                                            <input type="text" class="form-control form-control-sm text-center border-0"
-                                                value="{{ $item->jumlah_pembelian }}">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
+                                        </th>
+                                        <td>
+                                            <p class="mb-0 mt-4">{{ $item->barang->nama_produk }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 mt-4">Rp
+                                                {{ number_format($item->barang->harga_per_gram, 0, ',', '.') }}</p>
+                                        </td>
+                                        <td>
+                                            <div class="input-group quantity mt-4" style="width: 100px;">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                        <i class="fa fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text"
+                                                    class="form-control form-control-sm text-center border-0"
+                                                    value="{{ $item->jumlah_pembelian }}">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="mb-0 mt-4">Rp
-                                            {{ number_format($item->jumlah_pembelian * $item->barang->harga_per_gram, 0, ',', '.') }}
-                                        </p>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('chart.destroy', $item->id) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                                <i class="fa fa-times text-danger"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 mt-4">Rp
+                                                {{ number_format($item->jumlah_pembelian * $item->barang->harga_per_gram, 0, ',', '.') }}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('chart.destroy', $item->id) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="btn btn-md rounded-circle bg-light border mt-4">
+                                                    <i class="fa fa-times text-danger"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+
                         </tbody>
                     </table>
                 </div>
-                <div class="mt-5">
-                    <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
-                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply
-                        Coupon</button>
-                </div>
-                <div class="row g-4 justify-content-end">
+
+                {{-- <div class="row g-4 justify-content-end">
                     <div class="col-8"></div>
                     <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
                         <div class="bg-light rounded">
@@ -124,7 +127,7 @@
                                 type="button">Proceed Checkout</button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <!-- Cart Page End -->

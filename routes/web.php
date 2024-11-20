@@ -1,23 +1,24 @@
 <?php
 
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\ChartController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\DashboardSeller;
-use App\Http\Controllers\GaleriController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\PesananController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SellerController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\SosmedController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AlamatController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\DashboardSeller;
+use App\Http\Controllers\AlamatController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SosmedController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\TestimonialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,18 +56,25 @@ Route::group(['middleware' => ['auth']], function () {
     // USER PROFILE
     Route::resource('profile', ProfileController::class);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile/update-info/{id}', [ProfileController::class, 'updateInfo'])->name('profile.updateInfo');
+    Route::put('/profile/update-photo/{id}', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
     Route::get('/alamat', [AlamatController::class, 'index'])->name('alamat.index');
     Route::resource('alamat', AlamatController::class);
     Route::post('/alamat/bulk-delete', [AlamatController::class, 'bulkDelete'])->name('alamat.bulkDelete');
+
+    // to seller
     Route::get('/sell', [SellerController::class, 'index'])->name('sell');
     Route::resource('sell', SellerController::class);
+
+    // cart
     Route::get('/pesanan/user', [PesananController::class, 'index'])->name('pesanan.index');
+    Route::delete('/chart/{id}', [ChartController::class, 'destroy'])->name('chart.destroy'); //ditambahkan oleh rizki
+
 
 });
 
 // login admin
 Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index']);
     Route::resource('home', HomeController::class);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('sosmed', SosmedController::class);
@@ -102,3 +110,4 @@ Route::resource('pembayaran', PembayaranController::class);
 
 Route::get('pesanan/{id}/edit-status', 'PesananController@editStatus')->name('pesanan.editStatus');
 Route::put('pesanan/{id}/update-status', [PesananController::class, 'updateSgtatus'])->name('update_status');
+Route::resource('testimonial', TestimonialController::class);

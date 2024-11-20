@@ -1,4 +1,4 @@
-@extends('layouts.pages.seller.dashboard_seller')
+@extends('layouts.pages.seller.sidebar_seller')
 
 @section('content')
     <!DOCTYPE html>

@@ -74,38 +74,11 @@ class ChartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, string $id)
+
+    public function destroy($id)
     {
-        $request->validate([
-            'alamat' => 'required|string',
-            'no_telp' => 'required|numeric',
-            'jumlah_pembelian' => 'required|numeric|min:1',
-        ], [
-            'alamat.required' => 'Alamat harus diisi.',
-            'no_telp.required' => 'Nomor telepon harus diisi.',
-            'no_telp.numeric' => 'Nomor telepon harus berupa angka.',
-            'jumlah_pembelian.required' => 'Data harus diisi',
-            'jumlah_pembelian.numeric' => 'Data harus berupa angka',
-            'jumlah_pembelian.min' => 'Data tidak boleh kurang dari 1',
-        ]);
-
-        $cart = Chart::findOrFail($id);
-
-        $barang = Barang::findOrFail($cart->barang_id);
-        if ($request->jumlah_pembelian <= $barang->stok) {
-            $barang->stok -= $request->jumlah_pembelian;
-            $barang->update();
-        } else {
-            return redirect()->back()->with('warning', "Jumlah stok kurang, maksimal tersedia $barang->stok barang.");
-        }
-
-        $carts = $request->all();
-        $carts['barang_id'] = $cart->barang_id;
-        $carts['total'] = $request->jumlah_pembelian * $cart->barang->harga_satuan;
-
-        Pesanan::create($carts);
-
-        $cart->delete();
-        return redirect()->route('pesanan.index')->with('success', 'Pemesanan Berhasil');
+        $cartItem = Chart::findOrFail($id); // Temukan item berdasarkan ID
+        $cartItem->delete(); // Hapus item dari database
+        return redirect()->back()->with('success', 'Item berhasil dihapus dari keranjang.');
     }
 }

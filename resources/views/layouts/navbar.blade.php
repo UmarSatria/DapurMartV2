@@ -78,8 +78,7 @@
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                 <a href="{{ route('chart.index') }}" class="dropdown-item">Cart</a>
                                 <a href="{{ route('pesanan.index') }}" class="dropdown-item">Checkout</a>
-                                <a href="" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
+                                <a href="{{ route('testimonial.index') }}" class="dropdown-item">Testimonial</a>
                             </div>
                         </div>
                         {{-- <a href="contact.html" class="nav-item nav-link">Contact</a> --}}

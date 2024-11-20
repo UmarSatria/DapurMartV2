@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profile;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -24,10 +26,7 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -51,33 +50,49 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function updateInfo(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'fullname' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone_number' => 'required|string|max:15',
+        ]);
+
+        $user->update([
+            'fullname' => $request->fullname,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+        ]);
+
+        return redirect()->route('profile', $user->id)->with('success', 'Profil berhasil diperbarui.');
+    }
+
+    public function updatePhoto(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
         $request->validate([
             'photo_profile' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        $user = User::findOrFail($id);
 
         if ($request->hasFile('photo_profile')) {
             $file = $request->file('photo_profile');
             $path = $file->store('profile_photos', 'public');
 
             // Hapus gambar lama jika ada
-            if ($user->photo_profile && \Storage::exists('public/'.$user->photo_profile)) {
-                \Storage::delete('public/'.$user->photo_profile);
+            if ($user->photo_profile && \Storage::exists('public/' . $user->photo_profile)) {
+                \Storage::delete('public/' . $user->photo_profile);
             }
 
-            // Simpan path gambar baru ke dalam database
             $user->photo_profile = $path;
+            $user->save();
         }
 
-        // Simpan perubahan pada user
-        $user->save();
-
-        // Redirect kembali ke halaman profile.show dengan pesan sukses
-        return redirect()->route('profile', $user->id)->with('success', 'Profile updated successfully');
+        return redirect()->route('profile', $user->id)->with('success', 'Foto profil berhasil diperbarui.');
     }
+
 
 
 

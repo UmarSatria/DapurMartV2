@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Sosmed;
 use App\Models\Seller;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -16,18 +17,19 @@ class ShopController extends Controller
     {
         $sosmed = Sosmed::all();
         $query = $request->input('search');
-
+        $kategori = Kategori::orderBy('id', 'desc')->get();
+        
         if ($query) {
             // Cari barang berdasarkan nama produk dan sertakan informasi seller
             $shops = Barang::with('seller', 'kategori') // Sertakan relasi seller dan kategori
-                            ->where('nama_produk', 'like', '%' . $query . '%')
-                            ->paginate(3);
+                ->where('nama_produk', 'like', '%' . $query . '%')
+                ->paginate(3);
         } else {
             // Ambil semua barang dan sertakan informasi seller
             $shops = Barang::with('seller', 'kategori')->paginate(3);
         }
 
-        return view('shop', compact('shops', 'query', 'sosmed'));
+        return view('shop', compact('shops', 'query', 'sosmed', 'kategori'));
     }
 
 
@@ -35,10 +37,7 @@ class ShopController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
